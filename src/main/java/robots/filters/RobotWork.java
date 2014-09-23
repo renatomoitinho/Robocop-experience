@@ -65,14 +65,14 @@ public class RobotWork implements ServletContextListener {
             try {
                 InputStreamReader mustache =  Resources.lib("mustache").asReader();
                 InputStreamReader underscore = Resources.lib("underscore").asReader();
+                String js = Resources.script("app").asString();
 
-                String coffee = Resources.coffee("app").asString();
-
-                String reader =  coffeeScriptCompiler.compile(coffee , "robots", true, CoffeeScriptCompiler.SourceMap.V3, true, false).getJs();
+             //  String coffee = Resources.coffee("app").asString();
+             //   String reader =  coffeeScriptCompiler.compile(coffee , "robots", true, CoffeeScriptCompiler.SourceMap.V3, true, false).getJs();
 
                 scriptEngine.eval(mustache);
                 scriptEngine.eval(underscore);
-                scriptEngine.eval(reader);
+                scriptEngine.eval(js);
 
 
             } catch (ScriptException | IOException e) {
