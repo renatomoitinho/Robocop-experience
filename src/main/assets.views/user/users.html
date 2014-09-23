@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+<div>
+    <a href="/to/user.form"> new user</a>
+</div>
+<table class="table">
+    <thead>
+    <tr>
+        <th>#</th>
+        <th>Name</th>
+        <th>Age</th>
+        <th>Email</th>
+        <th></th>
+        <th></th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    {%#data%}
+    <tr>
+        <td>@</td>
+        <td>{%name%}</td>
+        <td>{%age%}</td>
+        <td>{%email%}</td>
+        <td>
+            <a href="/user/{%id%}">show</a>
+        </td>
+        <td>
+            <a href="/user/{%id%}/edit">update</a>
+        </td>
+        <td>
+            <form action="/user/{%id%}" method="post">
+                <input type="hidden" name="_method" value="delete"/>
+                <button type="submit" onclick="return confirm('Are you sure?')" class="btn">remove</button>
+            </form>
+        </td>
+    </tr>
+    {%/data%}
+    </tbody>
+</table>
+</body>
+</html>

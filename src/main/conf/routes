@@ -1,0 +1,28 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Home page
+GET     /                            app.index
+GET     /to/{template}               app.redirect
+GET     /status/{status}             app.status
+
+# Users
+
+GET     /user                        user.index
+POST    /user                        user.save
+GET     /user/{id}                   user.get
+POST    /user/{id}                   user.remove
+POST    /user/{id}/edit              user.update
+GET     /user/{id}/edit              user.update
+
+
+#GET     /application/{key}          app.application
+#GET     /login                      app.login
+#GET     /text/{values}              app.text
+#POST    /application                app.applicationForm
+
+
+
+# Map static resources from the /public folder to the /assets URL path
+#GET     /assets/*file               controllers.Assets.at(path="/public", file)

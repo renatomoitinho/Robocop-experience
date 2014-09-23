@@ -1,0 +1,81 @@
+<assembly
+	xmlns="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.0 http://maven.apache.org/xsd/assembly-1.1.0.xsd">
+	<id>package</id>
+	<formats>
+		<format>zip</format>
+	</formats>
+
+
+    <fileSets>
+
+        <fileSet>
+            <useDefaultExcludes>false</useDefaultExcludes>
+            <includes>
+                <include>target/*.jar</include>
+            </includes>
+        </fileSet>
+
+        <fileSet>
+            <directory>${project.basedir}/src/main/webapp</directory>
+            <outputDirectory>webapp</outputDirectory>
+        </fileSet>
+        <fileSet>
+            <directory>${project.basedir}/src/main/resources</directory>
+            <outputDirectory>conf</outputDirectory>
+            <excludes>
+                <exclude>*.xml</exclude>
+                <exclude>welcome</exclude>
+            </excludes>
+        </fileSet>
+        <fileSet>
+            <directory>${project.basedir}/src/main/resources</directory>
+            <outputDirectory>log</outputDirectory>
+            <includes>
+                <include>log</include>
+            </includes>
+            <excludes />
+        </fileSet>
+
+    </fileSets>
+
+    <!--
+	<fileSets>
+		<fileSet>
+			<directory>${project.basedir}/src/main/resources</directory>
+			<outputDirectory>conf</outputDirectory>
+			<includes>
+				<include>*.xml</include>
+			</includes>
+			<excludes>
+				<exclude>assembly.xml</exclude>
+			</excludes>
+		</fileSet>
+		<fileSet>
+			<directory>${project.basedir}/src/main/resources</directory>
+			<outputDirectory>log</outputDirectory>
+			<includes>
+				<include>log</include>
+			</includes>
+			<excludes />
+		</fileSet>
+		<fileSet>
+			<directory>${project.basedir}/src/main/resources</directory>
+			<outputDirectory>bin</outputDirectory>
+			<includes>
+				<include>*.sh</include>
+				<include>*.conf</include>
+			</includes>
+			<excludes />
+		</fileSet>
+	</fileSets>
+	<files>
+		<file>
+			<source>target/${artifactId}-${version}.${packaging}</source>
+			<outputDirectory>/</outputDirectory>
+			<destName>telemetry-platform.jar</destName>
+		</file>
+	</files>
+	-->
+</assembly>
