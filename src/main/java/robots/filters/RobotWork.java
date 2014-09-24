@@ -1,6 +1,5 @@
 package robots.filters;
 
-import com.theoryinpractise.coffeescript.CoffeeScriptCompiler;
 import org.apache.log4j.Logger;
 import robots.routes.Controllers;
 import robots.routes.Result;
@@ -22,6 +21,8 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.LinkedBlockingQueue;
 
+import static java.lang.System.getProperty;
+
 /**
  * Created with IntelliJ IDEA.
  *
@@ -31,11 +32,11 @@ import java.util.concurrent.LinkedBlockingQueue;
 @WebListener
 public class RobotWork implements ServletContextListener {
 
-    Logger log = Logger.getLogger(ServletContextListener.class);
+    final static Logger log = Logger.getLogger(ServletContextListener.class);
 
     private static final BlockingQueue<AsyncContext> process = new LinkedBlockingQueue<>();
     private static final ExecutorService singleExecute = Executors.newSingleThreadExecutor();
-    private static final CoffeeScriptCompiler coffeeScriptCompiler = new CoffeeScriptCompiler("1.6.1");
+   // private static final CoffeeScriptCompiler coffeeScriptCompiler = new CoffeeScriptCompiler("1.6.1");
 
     private static ThreadLocal<ScriptEngine> scriptEngineLocal = new ThreadLocal<ScriptEngine>() {
 
@@ -60,15 +61,15 @@ public class RobotWork implements ServletContextListener {
         @Override
         protected ScriptEngine initialValue() {
             ScriptEngineManager manager = new ScriptEngineManager();
-            ScriptEngine scriptEngine = manager.getEngineByName("jav8");
+            ScriptEngine scriptEngine = manager.getEngineByName(getProperty("robots.engine.script"));
 
             try {
                 InputStreamReader mustache =  Resources.lib("mustache").asReader();
                 InputStreamReader underscore = Resources.lib("underscore").asReader();
                 String js = Resources.script("app").asString();
 
-             //  String coffee = Resources.coffee("app").asString();
-             //   String reader =  coffeeScriptCompiler.compile(coffee , "robots", true, CoffeeScriptCompiler.SourceMap.V3, true, false).getJs();
+                //  String coffee = Resources.coffee("app").asString();
+                //   String reader =  coffeeScriptCompiler.compile(coffee , "robots", true, CoffeeScriptCompiler.SourceMap.V3, true, false).getJs();
 
                 scriptEngine.eval(mustache);
                 scriptEngine.eval(underscore);
@@ -89,6 +90,7 @@ public class RobotWork implements ServletContextListener {
     public static void newWork(AsyncContext c) {
         try {
             process.put(c);
+            log.info("put in queue ...");
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -129,6 +131,8 @@ public class RobotWork implements ServletContextListener {
 
                         ScriptEngine engine = scriptEngineLocal.get();
 
+                        log.info("get engine");
+
                         final Invocable inv = (Invocable) engine;
                         final Object obj = engine.get("obj");
                         final HttpServletRequest request = (HttpServletRequest) context.getRequest();
@@ -136,7 +140,7 @@ public class RobotWork implements ServletContextListener {
                         final Result result = (Result) request.getAttribute("result");
                         Controllers method = inv.getInterface(obj, Controllers.class);
 
-                       // inv.
+                        // inv.
 
                         log.info("invoiced " + result.triplet.first );
                         method.on(result.triplet.first, result, request, response);
@@ -156,7 +160,7 @@ public class RobotWork implements ServletContextListener {
 
     @Override
     public void contextDestroyed(ServletContextEvent servletContextEvent) {
-         log.info("contextDestroyed");
+        log.info("contextDestroyed");
         singleExecute.shutdownNow();
     }
 }

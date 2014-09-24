@@ -1,11 +1,11 @@
 <assembly
-	xmlns="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.0 http://maven.apache.org/xsd/assembly-1.1.0.xsd">
-	<id>package</id>
-	<formats>
-		<format>zip</format>
-	</formats>
+        xmlns="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.0"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.0 http://maven.apache.org/xsd/assembly-1.1.0.xsd">
+    <id>package</id>
+    <formats>
+        <format>zip</format>
+    </formats>
 
 
     <fileSets>
@@ -19,11 +19,27 @@
 
         <fileSet>
             <directory>${project.basedir}/src/main/webapp</directory>
-            <outputDirectory>webapp</outputDirectory>
+            <outputDirectory>target/webapp</outputDirectory>
+        </fileSet>
+        <fileSet>
+            <directory>${project.basedir}/src/main/conf</directory>
+            <outputDirectory>target/conf</outputDirectory>
+        </fileSet>
+        <fileSet>
+            <directory>${project.basedir}/src/main/assets.libs</directory>
+            <outputDirectory>target/assets.libs</outputDirectory>
+        </fileSet>
+        <fileSet>
+            <directory>${project.basedir}/src/main/assets.scripts</directory>
+            <outputDirectory>target/assets.scripts</outputDirectory>
+        </fileSet>
+        <fileSet>
+            <directory>${project.basedir}/src/main/assets.views</directory>
+            <outputDirectory>target/assets.views</outputDirectory>
         </fileSet>
         <fileSet>
             <directory>${project.basedir}/src/main/resources</directory>
-            <outputDirectory>conf</outputDirectory>
+            <outputDirectory>target/conf</outputDirectory>
             <excludes>
                 <exclude>*.xml</exclude>
                 <exclude>welcome</exclude>

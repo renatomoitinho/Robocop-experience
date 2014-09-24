@@ -31,7 +31,7 @@ public final class Main {
 
 
 
-        public static void main(String[] args){
+    public static void main(String[] args){
 
         try{
 
@@ -55,10 +55,11 @@ public final class Main {
 
         }catch (ServletException | LifecycleException  e){
 
-           e.printStackTrace();
-           System.exit(1);
+            e.printStackTrace();
+            System.exit(1);
 
         } catch (IOException e) {
+            e.printStackTrace();
 
             System.err.println("move webapp and conf/robots.properties for directory executable jar :/ ");
         }
@@ -105,8 +106,8 @@ public final class Main {
         File jar = new File(Main.class.getProtectionDomain().getCodeSource().getLocation().getPath()); //run out
         if(!jar.isDirectory()){
             String dirjar = jar.getAbsolutePath().replace(jar.getName(),"");
-            putInSystem( new FileInputStream(Paths.get(dirjar).resolve("../conf/robots.properties").toFile()));
-            System.setProperty("robots.webapp", Paths.get(dirjar).resolve("../webapp").toUri().getPath());
+            putInSystem( new FileInputStream(Paths.get(dirjar).resolve("conf/robots.properties").toFile()));
+            System.setProperty("robots.webapp", Paths.get(dirjar).resolve("webapp").toUri().getPath());
             return;
         }
 
@@ -114,4 +115,4 @@ public final class Main {
         putInSystem(inputStream);
     }
 
- }
+}

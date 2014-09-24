@@ -66,7 +66,7 @@ user.update = function(result, req) {
     if (req.getMethod() === "POST") {
         result.update(result.param.id, JSON.stringify(result.param));
         result.redirect("/user");
-        return;
+        return undefined;
     }
     return result.render.template("user/form-update", JSON.parse(result.get(result.param.id)));
 };
