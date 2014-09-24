@@ -4,9 +4,9 @@
 2) download jar file for your platform
 https://code.google.com/p/jav8/
 
-mac: jav8-jsr223-Mac OS X-x86_64-0.6.jar  </br>
-linux: jav8-jsr223-linux-amd64-0.6.jar    </br>
-win: jav8-jsr223-win-amd64-0.6.jar        </br>
+mac: jav8-jsr223-Mac OS X-x86_64-0.6.jar <br/>
+linux: jav8-jsr223-linux-amd64-0.6.jar    <br/>
+win: jav8-jsr223-win-amd64-0.6.jar        <br/>
 
 3) force dependency in maven
 
