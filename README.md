@@ -1,3 +1,46 @@
+# (Robocop) Create your Controller/View in MVC
+## with JavaScript v8 engine and your Model in Java[framework test experience]
+
+mapper your routes in /conf/routes
+
+```
+#   Home page
+    GET     /                            app.index
+```
+
+implements your controller in javascript/coffeScript
+
+```javascript
+app.index = function(result) {
+    return result.render.template('welcome', {
+        name: "Robotscop framework :) ",
+        text: { text: "hello" }
+    });
+};
+```
+
+or coffee
+
+```script
+app.index = (result) ->
+  result.render.template 'welcome',
+    name: 'Robotscop framework :) '
+    text: text: 'hello'
+```
+
+view with angular and mustache template
+
+```html
+<div>
+    <label> Name:
+        <input type="text" value="{% text.text %}" ng-model="yourName" placeholder="{% text.text %}"/>
+    </label>
+    <hr>
+    <h1>it's angular {{yourName}}!</h1>
+</div>
+```
+
+### Basic useful :+1:
 
 <b>1)</b> git clone https://github.com/renatomoitinho/robotscop-test.git
 
